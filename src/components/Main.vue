@@ -2,7 +2,7 @@
 import Nav from './Nav.vue'
 import Sermon from './Sermon.vue'
 import Events from './Events.vue'
-import Testimonies from './testimonies.vue'
+import Testimonies from './Testimonies.vue'
 import Activities from './Activities.vue';
 
 export default {
