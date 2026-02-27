@@ -1,5 +1,5 @@
 <script>
-import Nav from './nav.vue'
+import Nav from './Nav.vue'
 import Sermon from './Sermon.vue'
 import Events from './Events.vue'
 import Testimonies from './testimonies.vue'
