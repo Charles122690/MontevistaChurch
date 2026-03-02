@@ -67,58 +67,15 @@ export default {
           image: "bless.jpg",
           link: "#"
         },
-
       ],
 
       events: [
-        {
-          id: 1,
-          name: "Sunday Worship",
-          date: "Every Sunday",
-          time: "9AM - 12AM",
-          location: "Main Hall",
-          description: "Join our worship and fellowship."
-        },
-        {
-          id: 2,
-          name: "Youth Bible Study",
-          date: "Every Sunday Afternoon",
-          time: "2PM - 4PM",
-          location: "Youth Room",
-          description: "Engaging Bible study for teens."
-        },
-        {
-          id: 3,
-          name: "Prayer Meeting",
-          date: "Every Saturday Afternoon",
-          time: "2PM - 4PM",
-          location: "Main Hall",
-          description: "Powerful prayer, worship, and intercession."
-        },
-        {
-          id: 4,
-          name: "Online Corporate Prayer",
-          date: "Mon-Fri, Sunday",
-          time: "8PM - 9PM",
-          location: "Individual Homes",
-          description: "A united time of prayer, worship, and intercession."
-        },
-        {
-          id: 4,
-          name: "Online Youth Devotion",
-          date: "Every Tuesday & Friday",
-          time: "7PM - 8PM",
-          location: "Individual Homes",
-          description: "A time set apart for devotion and spiritual growth."
-        },
-        {
-          id: 5,
-          name: "Encounter",
-          date: "Always",
-          time: "time vary",
-          location: "Individual Homes",
-          description: "An encounter that awakens faith and renews hearts."
-        },
+        { id: 1, name: "Sunday Worship", date: "Every Sunday", time: "9AM - 12AM", location: "Main Hall", description: "Join our worship and fellowship." },
+        { id: 2, name: "Youth Bible Study", date: "Every Sunday Afternoon", time: "2PM - 4PM", location: "Youth Room", description: "Engaging Bible study for teens." },
+        { id: 3, name: "Prayer Meeting", date: "Every Saturday Afternoon", time: "2PM - 4PM", location: "Main Hall", description: "Powerful prayer, worship, and intercession." },
+        { id: 4, name: "Online Corporate Prayer", date: "Mon-Fri, Sunday", time: "8PM - 9PM", location: "Individual Homes", description: "A united time of prayer, worship, and intercession." },
+        { id: 5, name: "Youth Devotion", date: "Every Tue & Thur", time: "7PM - 7:30PM", location: "Individual Homes", description: "An encounter that awakens faith and renews hearts." },
+        { id: 5, name: "Visitation", date: "as needed", time: "time may vary", location: "Individual Homes", description: "A heartfelt visit that strengthens bonds and nurtures faith." }
       ],
 
       contact: {
@@ -131,8 +88,7 @@ export default {
 
   mounted() {
     this.heroInterval = setInterval(() => {
-      this.activeHero =
-        (this.activeHero + 1) % this.heroImages.length
+      this.activeHero = (this.activeHero + 1) % this.heroImages.length
     }, 5000)
   },
 
@@ -148,9 +104,7 @@ export default {
 
     scrollToContact() {
       const el = document.getElementById('contact')
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
-      }
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
     },
 
     submitForm() {
@@ -159,90 +113,68 @@ export default {
       this.contact.email = ""
       this.contact.message = ""
     },
-    methods: {
-      openModal(activity) {
-        this.selectedActivity = activity;
-        this.$emit('activity-selected', activity); // emit event
-      }
-    },
-    methods: {
-      handleActivitySelected(activity) {
-        console.log('User clicked on activity:', activity.title);
-        // You can trigger additional actions here
-      }
+
+    handleActivitySelected(activity) {
+      console.log('User clicked on activity:', activity.title);
     }
   }
 }
 </script>
 
 <template>
-  <div class="bg-gray-900 text-gray-100 min-h-screen">
+  <div class="bg-[#f8f7f4] text-[#2f2f2f] min-h-screen">
 
-    <!-- NAVBAR -->
     <Nav @goto="gotoPage" />
 
-    <!-- HOME PAGE -->
     <div v-if="currentPage === 'home'">
 
-      <!-- HERO SECTION -->
+      <!-- HERO -->
       <section class="relative min-h-[85vh] flex items-center justify-center text-center overflow-hidden">
-
         <transition name="fade" mode="out-in">
           <div :key="heroImages[activeHero].id" class="absolute inset-0 w-full h-full">
 
-            <!-- Background -->
             <img :src="heroImages[activeHero].image" class="absolute inset-0 w-full h-full object-cover"
               alt="Church Hero" />
 
-            <!-- Overlay -->
-            <div class="absolute inset-0 bg-linear-to-b from-black/60 via-black/50 to-black/80"></div>
+            <div class="absolute inset-0 bg-white/20"></div>
 
-            <!-- Content -->
             <div class="relative z-10 flex flex-col items-center justify-center h-full px-6">
 
-              <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-cyan-400 drop-shadow-[0_0_20px_#22d3ee]">
+              <h1 class="text-5xl md:text-6xl font-extrabold mb-6 text-[#4f6f52] bg-white/50 px-4 py-4 rounded-2xl">
                 {{ heroImages[activeHero].title }}
               </h1>
 
-              <p class="text-xl md:text-2xl text-gray-200 max-w-2xl">
+              <p class="text-xl md:text-2xl text-[#4b5563] max-w-2xl bg-white/50 px-4 py-4 rounded-2xl">
                 {{ heroImages[activeHero].subtitle }}
               </p>
 
-              <button @click="scrollToContact" class="mt-8 bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500
-                       text-gray-900 font-bold px-10 py-3 rounded-full
-                       shadow-lg hover:scale-105 transition duration-300 cursor-pointer">
+              <button @click="scrollToContact" class="mt-8 bg-[#4f6f52] text-white font-semibold px-10 py-3 rounded-full
+                       hover:bg-[#3f5a42] transition duration-300 opacity-80 border-2 border-white cursor-pointer">
                 Contact Us
               </button>
 
             </div>
           </div>
         </transition>
-
       </section>
 
-      <!-- STATS SECTION -->
-      <section class="py-20 bg-gray-800">
+      <!-- STATS -->
+      <section class="py-20 bg-white">
         <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
 
           <div>
-            <h3 class="text-5xl font-extrabold text-cyan-400">
-              {{ stats.members }}
-            </h3>
-            <p class="mt-2 text-gray-300">Happy Members</p>
+            <h3 class="text-5xl font-bold text-[#4f6f52]">{{ stats.members }}</h3>
+            <p class="mt-2 text-[#5f5f5f]">Happy Members</p>
           </div>
 
           <div>
-            <h3 class="text-5xl font-extrabold text-cyan-400">
-              {{ stats.years }}
-            </h3>
-            <p class="mt-2 text-gray-300">Years of Ministry</p>
+            <h3 class="text-5xl font-bold text-[#4f6f52]">{{ stats.years }}</h3>
+            <p class="mt-2 text-[#5f5f5f]">Years of Ministry</p>
           </div>
 
           <div>
-            <h3 class="text-5xl font-extrabold text-cyan-400">
-              {{ stats.events }}
-            </h3>
-            <p class="mt-2 text-gray-300">Events Held</p>
+            <h3 class="text-5xl font-bold text-[#4f6f52]">{{ stats.events }}</h3>
+            <p class="mt-2 text-[#5f5f5f]">Events Held</p>
           </div>
 
         </div>
@@ -250,167 +182,154 @@ export default {
 
     </div>
 
-    <!-- SERMON PAGE -->
     <Sermon v-if="currentPage === 'sermons'" :sermons="sermons" />
-
-    <!-- EVENTS PAGE -->
     <Events v-if="currentPage === 'events'" :events="events" />
-
-    <!-- TESTIMONIES -->
     <Testimonies v-if="currentPage === 'testimonies'" />
-    <!-- Activities -->
     <Activities @activity-selected="handleActivitySelected" />
 
-
     <!-- CONTACT -->
-    <section id="contact" class="py-24 px-6 max-w-6xl mx-auto bg-gray-950 rounded-3xl relative overflow-hidden">
-      <!-- Soft Gradient Background -->
-      <div
-        class="absolute inset-0 bg-linear-to-tr from-gray-900 via-gray-800 to-gray-950 opacity-40 pointer-events-none rounded-3xl">
-      </div>
+    <section id="contact" class="py-24 px-6 max-w-6xl mx-auto bg-white rounded-3xl border border-[#e5e5e5]">
 
-      <div class="grid md:grid-cols-2 gap-12 items-start relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
 
-        <!-- Left Side: Contact Form -->
         <div>
-          <h2 class="text-4xl font-extrabold text-cyan-400 mb-8">
-            Contact Us
-          </h2>
+          <h2 class="text-4xl font-bold text-[#4f6f52] mb-8">Contact Us</h2>
 
-          <form @submit.prevent="submitForm" class="bg-gray-800 p-10 rounded-3xl shadow-xl space-y-6">
-            <input v-model="contact.name" type="text" placeholder="Full Name"
-              class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              required />
+          <form @submit.prevent="submitForm" class="bg-[#f1efe9] p-10 rounded-3xl space-y-6">
 
-            <input v-model="contact.email" type="email" placeholder="Email"
-              class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              required />
+            <input v-model="contact.name" type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg bg-white border border-[#dcdcdc]
+                     text-[#2f2f2f] focus:outline-none focus:ring-2 focus:ring-[#4f6f52]" required />
 
-            <textarea v-model="contact.message" rows="5" placeholder="Your Message"
-              class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              required></textarea>
+            <input v-model="contact.email" type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg bg-white border border-[#dcdcdc]
+                     text-[#2f2f2f] focus:outline-none focus:ring-2 focus:ring-[#4f6f52]" required />
 
-            <button type="submit"
-              class="w-full bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500
-               text-gray-900 font-bold py-3 rounded-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+            <textarea v-model="contact.message" rows="5" placeholder="Your Message" class="w-full px-4 py-3 rounded-lg bg-white border border-[#dcdcdc]
+                     text-[#2f2f2f] focus:outline-none focus:ring-2 focus:ring-[#4f6f52]" required></textarea>
+
+            <button type="submit" class="w-full bg-[#4f6f52] text-white font-semibold py-3 rounded-lg
+                     hover:bg-[#3f5a42] transition">
               Send Message
             </button>
           </form>
         </div>
 
-        <!-- Right Side: Church Info / Engagement -->
-        <div class="text-gray-200 space-y-8">
-          <h3 class="text-3xl font-semibold text-purple-400">Get Connected</h3>
-          <p class="text-gray-300">
-            We'd love to hear from you! Whether you have questions, prayer requests, or want to join one of our
-            ministries, reach out and we'll get back to you.
-          </p>
+        <div class="text-[#5f5f5f] space-y-8">
+          <h3 class="text-3xl font-semibold text-[#7c6f64]">Get Connected</h3>
+
+          <p>We'd love to hear from you! Reach out and we'll get back to you.</p>
 
           <div class="space-y-4">
-            <div class="flex items-start gap-4">
-              <span class="text-cyan-400 text-xl">📍</span>
-              <div>
-                <h4 class="font-semibold">Visit Us</h4>
-                <p>Bankerohan, Montevista, Davao de Oro</p>
-              </div>
+            <div>
+              <h4 class="font-semibold text-[#2f2f2f]">Visit Us</h4>
+              <p>Bankerohan, Montevista, Davao de Oro</p>
             </div>
 
-            <div class="flex items-start gap-4">
-              <span class="text-cyan-400 text-xl">⏰</span>
-              <div>
-                <h4 class="font-semibold">Service Times</h4>
-                <p>Sunday 9:00 AM & 11:00 AM | Saturday 3:00 PM</p>
-              </div>
+            <div>
+              <h4 class="font-semibold text-[#2f2f2f]">Service Times</h4>
+              <p>Sunday 9:00 AM & 11:00 AM | Saturday 3:00 PM</p>
             </div>
 
-            <div class="flex items-start gap-4">
-              <span class="text-cyan-400 text-xl">🙏</span>
-              <div>
-                <h4 class="font-semibold">Prayer Requests</h4>
-                <p>Send us your prayer needs and our prayer team will lift them up.</p>
-              </div>
+            <div>
+              <h4 class="font-semibold text-[#2f2f2f]">Prayer Requests</h4>
+              <p>Send us your prayer needs and our prayer team will lift them up.</p>
             </div>
           </div>
 
-          <!-- Social Media & Gmail -->
-          <div class="mt-6 space-y-4">
-            <h4 class="font-semibold text-purple-400">Follow Us</h4>
-
-            <!-- Facebook: Montevista Mission -->
-            <a href="https://www.facebook.com/montevistamission" target="_blank"
-              class="flex items-center gap-2 hover:scale-105 transition">
-              <!-- SVG Facebook Logo -->
-              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="#00bcd4" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325v21.351C0 23.407 0.593 24 1.325 24H12.82v-9.294H9.692V11.07h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463 0.099 2.794 0.143v3.24l-1.918 0.001c-1.504 0-1.794 0.715-1.794 1.763v2.31h3.587l-0.467 3.636h-3.12V24h6.116c0.732 0 1.325-0.593 1.325-1.324V1.325C24 0.593 23.407 0 22.675 0z" />
-              </svg>
-              <span class="text-gray-300">Montevista Mission</span>
-            </a>
-
-            <!-- Gmail -->
-            <div class="flex items-center gap-2 hover:scale-105 trnasition cursor-pointer">
-              <!-- SVG Gmail Logo -->
-              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="#f44336" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M20 4H4C2.897 4 2 4.897 2 6v12c0 1.103 0.897 2 2 2h16c1.103 0 2-0.897 2-2V6c0-1.103-0.897-2-2-2zm0 2l-8 5-8-5h16zm-16 12V8l8 5 8-5v10H4z" />
-              </svg>
-              <span class="text-gray-300">cojmontevistamission@gmail.com</span>
-            </div>
-
-          </div>
         </div>
-
       </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-950 text-gray-400 py-3 border-t border-gray-800 mt-10 opacity-50">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-6 gap-6">
+    <footer class="bg-[#f1efe9] text-[#5f5f5f] border-t border-[#e5e5e5] mt-5 opacity-75">
 
-        <!-- About / Church Info -->
-        <div class="flex-1 text-center md:text-left">
-          <p class="font-semibold text-cyan-400">AAIM - THE CHURCH OF JESUS CHRIST RESTORATION, INC</p>
-          <p>Montevista, Davao de Oro, Philippines</p>
+      <!-- Main Footer Content -->
+      <div class="max-w-6xl mx-auto px-6 py-2 grid grid-cols-1 md:grid-cols-4 gap-10">
+
+        <!-- Church Info -->
+        <div>
+          <h3 class="text-lg font-semibold text-[#4f6f52] mb-4">
+            AAIM - The Church of Jesus Christ Restoration, Inc.
+          </h3>
+          <p class="text-sm leading-relaxed">
+            Montevista, Davao de Oro, Philippines
+          </p>
+          <p class="text-sm mt-2">
+            A community rooted in faith, fellowship, and service.
+          </p>
         </div>
 
-        <!-- Quick Links / Navigation -->
-        <div class="flex-1 flex justify-center gap-4 flex-wrap">
-          <a href="#home" class="hover:text-cyan-400 transition">Home</a>
-          <a href="#about" class="hover:text-cyan-400 transition">About</a>
-          <a href="#activities" class="hover:text-cyan-400 transition">Activities</a>
-          <a href="#testimonials" class="hover:text-cyan-400 transition">Testimonials</a>
-          <a href="#contact" class="hover:text-cyan-400 transition">Contact</a>
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-md font-semibold text-[#2f2f2f] mb-4">
+            Quick Links
+          </h4>
+          <ul class="space-y-2 text-sm ">
+            <li>
+              <button @click="gotoPage('home')" class="hover:text-[#4f6f52] transition cursor-pointer">Home</button>
+            </li>
+            <li>
+              <button @click="gotoPage('sermons')" class="hover:text-[#4f6f52] transition cursor-pointer">Sermons</button>
+            </li>
+            <li>
+              <button @click="gotoPage('events')" class="hover:text-[#4f6f52] transition cursor-pointer">Events</button>
+            </li>
+            <li>
+              <button @click="gotoPage('activities')" class="hover:text-[#4f6f52] transition cursor-pointer">Activities</button>
+            </li>
+            <li>
+              <button @click="gotoPage('testimonies')" class="hover:text-[#4f6f52] transition cursor-pointer">Testimonies</button>
+            </li>
+            <li>
+              <button @click="gotoPage('contact')" class="hover:text-[#4f6f52] transition cursor-pointer">Contact</button>
+            </li>
+          </ul>
         </div>
 
-        <!-- Connect / Social Media -->
-        <div class="flex-1 flex justify-center md:justify-end items-center gap-4">
-          <!-- Facebook -->
-          <a href="https://www.facebook.com/montevistamission" target="_blank" class="hover:text-cyan-400 transition">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#00bcd4" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M22.675 0H1.325C0.593 0 0 0.593 0 1.325v21.351C0 23.407 0.593 24 1.325 24H12.82v-9.294H9.692V11.07h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463 0.099 2.794 0.143v3.24l-1.918 0.001c-1.504 0-1.794 0.715-1.794 1.763v2.31h3.587l-0.467 3.636h-3.12V24h6.116c0.732 0 1.325-0.593 1.325-1.324V1.325C24 0.593 23.407 0 22.675 0z" />
-            </svg>
-          </a>
+        <!-- Service Times -->
+        <div>
+          <h4 class="text-md font-semibold text-[#2f2f2f] mb-4">
+            Service Times
+          </h4>
+          <ul class="space-y-2 text-sm">
+            <li>Sunday Worship – 9:00 AM</li>
+            <li>Sunday Afternoon – 2:00 PM</li>
+            <li>Saturday Prayer – 3:00 PM</li>
+          </ul>
+        </div>
 
-          <!-- Gmail -->
-          <a href="mailto:cojmontevistamission@gmail.com" class="hover:text-red-500 transition">
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="#f44336" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M20 4H4C2.897 4 2 4.897 2 6v12c0 1.103 0.897 2 2 2h16c1.103 0 2-0.897 2-2V6c0-1.103-0.897-2-2-2zm0 2l-8 5-8-5h16zm-16 12V8l8 5 8-5v10H4z" />
-            </svg>
-          </a>
+        <!-- Connect -->
+        <div>
+          <h4 class="text-md font-semibold text-[#2f2f2f] mb-4">
+            Connect With Us
+          </h4>
+
+          <div class="space-y-2 text-sm">
+            <p>Email:
+              <a href="mailto:cojmontevistamission@gmail.com" class="hover:text-[#4f6f52] transition">
+                cojmontevistamission@gmail.com
+              </a>
+            </p>
+            <p>
+              <a href="https://www.facebook.com/montevistamission" target="_blank"
+                class="hover:text-[#4f6f52] transition">
+                Facebook: Montevista Mission
+              </a>
+            </p>
+          </div>
         </div>
 
       </div>
 
-      <!-- Bottom copyright -->
-      <div class="mt-4 text-center text-gray-500 text-sm">
-        <p>© 2026 All Rights Reserved.</p>
-        <p>Photos: <a href="https://unsplash.com/" target="_blank" class="hover:text-cyan-400">Unsplash</a>,
-          <a href="https://images.google.com/" target="_blank" class="hover:text-cyan-400">Google Images</a>
-        </p>
+      <!-- Divider -->
+      <div class="border-t border-[#e5e5e5]"></div>
+
+      <!-- Bottom Bar -->
+      <div class="max-w-6xl mx-auto px-6 py-2 text-center text-sm text-[#7a7a7a]">
+        <p>© 2026 AAIM - The Church of Jesus Christ Restoration, Inc. All rights reserved.</p>
       </div>
+
     </footer>
+
   </div>
 </template>
 
